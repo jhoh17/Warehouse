@@ -4,6 +4,7 @@
 #include <math.h>
 
 
+
 /*--------------------------------------*/
 /*	 Arctangent				            */
 /*--------------------------------------*/
@@ -12,7 +13,7 @@ float ATAN_FUN(float y, float x)
 {
 	float th;
 
-	x += float(1.e-38);
+	x += 1.e-38;
 
 	if (y < x)
 	{
@@ -23,28 +24,26 @@ float ATAN_FUN(float y, float x)
 		}
 		else
 		{
-			if (x > 0.)	th = (float)(-0.5) * fPI + *(float*)(ATAN_ADDR + (int)(-x / y * ATAN_NUM));	// section 7
-			else		th = (float)(-0.5) * fPI - *(float*)(ATAN_ADDR + (int)(x / y * ATAN_NUM));		// section 6
+			if (x > 0.)	th = -0.5 * FPI + *(float*)(ATAN_ADDR + (int)(-x / y * ATAN_NUM));	// section 7
+			else		th = -0.5 * FPI - *(float*)(ATAN_ADDR + (int)(x / y * ATAN_NUM));		// section 6
 		}
 	}
 	else
 	{
 		if (y > -x)
 		{
-			if (x > 0.)	th = (float)(0.5) * fPI - *(float*)(ATAN_ADDR + (int)(x / y * ATAN_NUM));		// section 2
-			else		th = (float)(0.5) * fPI + *(float*)(ATAN_ADDR + (int)(-x / y * ATAN_NUM));		// section 3
+			if (x > 0.)	th = 0.5 * FPI - *(float*)(ATAN_ADDR + (int)(x / y * ATAN_NUM));		// section 2
+			else		th = 0.5 * FPI + *(float*)(ATAN_ADDR + (int)(-x / y * ATAN_NUM));		// section 3
 		}
 		else
 		{
-			if (y > 0.)	th = fPI - *(float*)(ATAN_ADDR + (int)(-y / x * ATAN_NUM));			// section 4
-			else		th = -fPI + *(float*)(ATAN_ADDR + (int)(y / x * ATAN_NUM));			// section 5
+			if (y > 0.)	th = FPI - *(float*)(ATAN_ADDR + (int)(-y / x * ATAN_NUM));			// section 4
+			else		th = -FPI + *(float*)(ATAN_ADDR + (int)(y / x * ATAN_NUM));			// section 5
 		}
 	}
 
 	return th;
 }
-
-
 
 
 
@@ -67,6 +66,10 @@ int hapLimit01(int x, int y)
 	if (z > 1000) z = 0;
 	return z;
 }
+
+
+
+
 
 
 
